@@ -5,6 +5,7 @@ int var =0;
 int Delay = 150;
 int backgroundy;
 int base_y = 97;
+int TEST = 0;
 // You'll probably want to replace this with a separate image of the rocket
 // and the actual title when you know how
 const uint8_t Start[] PROGMEM ={
@@ -158,19 +159,21 @@ void renderGameplay(void){
  
   if(arduboy.pressed(A_BUTTON)){
 
-  for (int i=0; i <= 150; i++){
+  for (int i=0; i <= 7000; i++){
   if(playery > 50){
     playery --;
+    
   }
+  TEST++;
   var++;
   Delay--;
   
   arduboy.drawBitmap(0,39, HEIGHT2, 7, 25,BLACK);
-  arduboy.setCursor(0, 40);
-  arduboy.print(playery);
+  arduboy.setCursor(0, 25);
+  arduboy.print(TEST);
   arduboy.display();
   
-  Serial.println(playery);     
+  Serial.println(TEST);     
   delay(10);
 
 
