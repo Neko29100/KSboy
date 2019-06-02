@@ -4,9 +4,9 @@
 
 enum class GameState : uint8_t
 {
-	TitleScreen,
-	Gameplay,
-	EndScreen,
+  TitleScreen,
+  Gameplay,
+  EndScreen,
 };
 
 Arduboy2 arduboy;
@@ -40,70 +40,70 @@ uint16_t boosterY = 0;
 
 void setup()
 {
-	arduboy.begin();
-	arduboy.clear();
+  arduboy.begin();
+  arduboy.clear();
 }
 
 void loop()
 {
-	// This stops the Arduboy trying to draw before it's ready
-	if(!arduboy.nextFrame())
-	return;
+  // This stops the Arduboy trying to draw before it's ready
+  if(!arduboy.nextFrame())
+  return;
 
-	// This updates the button state
-	arduboy.pollButtons();
+  // This updates the button state
+  arduboy.pollButtons();
 
-	// Do different things depending on the current game state
-	switch(gameState)
-	{
-	case GameState::TitleScreen:
-		updateTitleScreen();
-		break;
-	case GameState::Gameplay:
-		renderGameplay();
-		break;
-	case GameState::EndScreen:
-		renderEndScreen();
-		break;
-	}
+  // Do different things depending on the current game state
+  switch(gameState)
+  {
+  case GameState::TitleScreen:
+    updateTitleScreen();
+    break;
+  case GameState::Gameplay:
+    renderGameplay();
+    break;
+  case GameState::EndScreen:
+    renderEndScreen();
+    break;
+  }
 
-	// This clears the screen
-	arduboy.clear();
+  // This clears the screen
+  arduboy.clear();
 
-	// Do different things depending on the current game state
-	switch(gameState)
-	{
-	case GameState::TitleScreen:
-		renderTitleScreen();
-		break;
-	case GameState::Gameplay:
-		renderGameplay();
-		break;
-	case GameState::EndScreen:
-		renderEndScreen();
-		break;
-	}
+  // Do different things depending on the current game state
+  switch(gameState)
+  {
+  case GameState::TitleScreen:
+    renderTitleScreen();
+    break;
+  case GameState::Gameplay:
+    renderGameplay();
+    break;
+  case GameState::EndScreen:
+    renderEndScreen();
+    break;
+  }
 
-	// This displays the screen
-	arduboy.display();
+  // This displays the screen
+  arduboy.display();
 }
 
 void updateTitleScreen()
 {
   arduboy.clear();
-	// If A is pressed, move to Gameplay state
-	if(arduboy.justPressed(A_BUTTON))
-	{
-		gameState = GameState::Gameplay;
-	}
+  // If A is pressed, move to Gameplay state
+  if(arduboy.justPressed(A_BUTTON))
+  {
+    gameState = GameState::Gameplay;
+  }
 }
 
 void renderTitleScreen()
 {
-	// You don't need to specify the colour, it defaults to 'BLACK',
-	// which means 'draw the image normally'
-	// Using 'WHITE' inverts the image
-	arduboy.drawBitmap(0, 0, Start, 128, 63);
+  // You don't need to specify the colour, it defaults to 'BLACK',
+  // which means 'draw the image normally'
+  // Using 'WHITE' inverts the image
+  arduboy.drawBitmap(0, 0, Start, 128, 63);
 }
 
 void renderEndScreen()
@@ -119,87 +119,87 @@ void renderEndScreen()
 
 void renderGameplay()
 {
-	if(arduboy.pressed(A_BUTTON))
-	{
-		for (int i = 0; i <= 7000; i++)
-		{    
-			var++;
-			Delay--;
-			planety++;
+  if(arduboy.pressed(A_BUTTON))
+  {
+    for (int i = 0; i <= 7000; i++)
+    {    
+      var++;
+      Delay--;
+      planety++;
 
-			if(playery > 50)
-			{
-				playery --;
-				boosteryR--;
-				boosteryL--;
-			}
-			
-			if ( Height <= 100 )
-			{
-				Height++;
-			}
-			
-			if (Height >= 100 )
-			{
-				Height + 2;
-			}
-			
-			if (Height >= 250 )
-			{
-				Height + 3;
-			}
-			   
-			if ((Height > 150) & (boosteryL > 19))
-			{
-				gameState = GameState::EndScreen;
-			}
+      if(playery > 50)
+      {
+        playery --;
+        boosteryR--;
+        boosteryL--;
+      }
+      
+      if ( Height <= 100 )
+      {
+        Height++;
+      }
+      
+      if (Height >= 100 )
+      {
+        Height + 2;
+      }
+      
+      if (Height >= 250 )
+      {
+        Height + 3;
+      }
+         
+      if ((Height > 150) & (boosteryL > 19))
+      {
+        gameState = GameState::EndScreen;
+      }
 
-			if ((Height > 100) & (Height < 150))
-			{
-				arduboy.drawBitmap(40, 15, Detach, 10, 43, BLACK);
+      if ((Height > 100) & (Height < 150))
+      {
+        arduboy.drawBitmap(40, 15, Detach, 10, 43, BLACK);
 
-				if(arduboy.pressed(A_BUTTON))
-				{
-					boosterxL++;
-					boosterxR--;
+        if(arduboy.pressed(A_BUTTON))
+        {
+          boosterxL++;
+          boosterxR--;
 
-					boosteryL++;
-					boosteryR++;
-				}
-			}
+          boosteryL++;
+          boosteryR++;
+        }
+      }
 
-			arduboy.drawBitmap(0,29, HEIGHT2, 9, 35, BLACK);
-			arduboy.setCursor(0, 20);
-			arduboy.print(Height);
-			arduboy.display();
+      arduboy.drawBitmap(0,29, HEIGHT2, 9, 35, BLACK);
+      arduboy.setCursor(0, 20);
+      arduboy.print(Height);
+      arduboy.display();
 
-			for( int backgroundx = 0; backgroundx < 128; backgroundx = backgroundx + 8 )
-			{
-				for( int backgroundy = 0; backgroundy < 64; backgroundy = backgroundy + 8 )
-				{
-					arduboy.drawBitmap( backgroundx, backgroundy, background, 8, 8);
-				}
-			}
+      for( int backgroundx = 0; backgroundx < 128; backgroundx = backgroundx + 8 )
+      {
+        for( int backgroundy = 0; backgroundy < 64; backgroundy = backgroundy + 8 )
+        {
+          arduboy.drawBitmap( backgroundx, backgroundy, background, 8, 8);
+        }
+      }
 
-			delay(100);
+      delay(100);
 
-			arduboy.drawBitmap(planety,20, Planet, 43, 17, BLACK);
-			arduboy.drawBitmap(playery,playerx, player, 43, 17, BLACK);
-			arduboy.drawBitmap(boosteryL,boosterxL, boosterL, 32, 9, BLACK);
-			arduboy.drawBitmap(boosteryR,boosterxR, boosterR, 32, 9, BLACK);
-			
-			if(var < 40)
-			{
-				arduboy.drawBitmap(97,15, base2, 32, 32, BLACK);
-			}
+      arduboy.drawBitmap(planety,20, Planet, 43, 17, BLACK);
+      arduboy.drawBitmap(playery,playerx, player, 43, 17, BLACK);
+      arduboy.drawBitmap(boosteryL,boosterxL, boosterL, 32, 9, BLACK);
+      arduboy.drawBitmap(boosteryR,boosterxR, boosterR, 32, 9, BLACK);
+      
+      if(var < 40)
+      {
+        arduboy.drawBitmap(97,15, base2, 32, 32, BLACK);
+      }
 
-			if(var > 40)
-			{
-				arduboy.drawBitmap(base_y,15, base1, 32, 32, BLACK);
-				base_y++;
-			}
+      if(var > 40)
+      {
+        arduboy.drawBitmap(base_y,15, base1, 32, 32, BLACK);
+        base_y++;
+      }
 
-			arduboy.display();
-		}
-	}
+      arduboy.display();
+    }
+  }
 }
