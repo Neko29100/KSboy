@@ -41,7 +41,6 @@ uint16_t boosterY = 0;
 void setup()
 {
   arduboy.begin();
-  arduboy.clear();
 }
 
 void loop()
@@ -90,7 +89,6 @@ void loop()
 
 void updateTitleScreen()
 {
-  arduboy.clear();
   // If A is pressed, move to Gameplay state
   if(arduboy.justPressed(A_BUTTON))
   {
