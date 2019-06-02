@@ -6,7 +6,7 @@ enum class GameState : uint8_t
 {
 	TitleScreen,
 	Gameplay,
-  EndScreen,
+	EndScreen,
 };
 
 Arduboy2 arduboy;
@@ -41,8 +41,7 @@ uint16_t boosterY = 0;
 void setup()
 {
 	arduboy.begin();
- 
-  arduboy.clear();
+	arduboy.clear();
 }
 
 void loop()
@@ -63,9 +62,9 @@ void loop()
 	case GameState::Gameplay:
 		renderGameplay();
 		break;
-      case GameState::EndScreen:
-    renderEndScreen();
-    break;
+	case GameState::EndScreen:
+		renderEndScreen();
+		break;
 	}
 
 	// This clears the screen
@@ -80,9 +79,9 @@ void loop()
 	case GameState::Gameplay:
 		renderGameplay();
 		break;
-      case GameState::EndScreen:
-    renderEndScreen();
-    break;
+	case GameState::EndScreen:
+		renderEndScreen();
+		break;
 	}
 
 	// This displays the screen
@@ -99,7 +98,6 @@ void updateTitleScreen()
 	}
 }
 
-
 void renderTitleScreen()
 {
 	// You don't need to specify the colour, it defaults to 'BLACK',
@@ -107,6 +105,7 @@ void renderTitleScreen()
 	// Using 'WHITE' inverts the image
 	arduboy.drawBitmap(0, 0, Start, 128, 63);
 }
+
 void renderEndScreen()
 {
   arduboy.drawBitmap(0, 0, GOver, 128, 64);
@@ -121,55 +120,53 @@ void renderEndScreen()
 void renderGameplay()
 {
 	if(arduboy.pressed(A_BUTTON))
-	{  
-
-		
+	{
 		for (int i = 0; i <= 7000; i++)
 		{    
-		  var++;
-      Delay--;
-      planety++;
-      
+			var++;
+			Delay--;
+			planety++;
+
 			if(playery > 50)
 			{
 				playery --;
 				boosteryR--;
 				boosteryL--;
 			}
-		if ( Height <= 100 ) {
-    	Height++;
-		}
-    if (Height >= 100 ) {
-    Height+= 2;
-    
-   }
-      if (Height >= 250 ) {
-    Height+= 3;
-  
-   }
-   
-		if (Height > 150 & boosteryL > 19 )
-     {
-    gameState = GameState::EndScreen;
-     }
-     
-
-
-			if (Height > 100 & Height < 150  )
+			
+			if ( Height <= 100 )
 			{
-        arduboy.drawBitmap(40,15,Detach, 10, 43, BLACK );
-        
-				if(arduboy.pressed(A_BUTTON))
-				{
-						boosterxL++;
-						boosterxR--;
-           
-						boosteryL++;
-						boosteryR++;
-				}
+				Height++;
+			}
+			
+			if (Height >= 100 )
+			{
+				Height + 2;
+			}
+			
+			if (Height >= 250 )
+			{
+				Height + 3;
+			}
+			   
+			if ((Height > 150) & (boosteryL > 19))
+			{
+				gameState = GameState::EndScreen;
 			}
 
+			if ((Height > 100) & (Height < 150))
+			{
+				arduboy.drawBitmap(40, 15, Detach, 10, 43, BLACK);
 
+				if(arduboy.pressed(A_BUTTON))
+				{
+					boosterxL++;
+					boosterxR--;
+
+					boosteryL++;
+					boosteryR++;
+				}
+			}
 
 			arduboy.drawBitmap(0,29, HEIGHT2, 9, 35, BLACK);
 			arduboy.setCursor(0, 20);
@@ -190,6 +187,7 @@ void renderGameplay()
 			arduboy.drawBitmap(playery,playerx, player, 43, 17, BLACK);
 			arduboy.drawBitmap(boosteryL,boosterxL, boosterL, 32, 9, BLACK);
 			arduboy.drawBitmap(boosteryR,boosterxR, boosterR, 32, 9, BLACK);
+			
 			if(var < 40)
 			{
 				arduboy.drawBitmap(97,15, base2, 32, 32, BLACK);
