@@ -140,22 +140,22 @@ void renderGameplay()
     	Height++;
 		}
     if (Height >= 100 ) {
-    Height + 2;
-   
+    Height+= 2;
+    
    }
       if (Height >= 250 ) {
-    Height + 3;
-   
+    Height+= 3;
+  
    }
    
-		if (Height > 150 && boosteryL > 19 )
+		if (Height > 150 & boosteryL > 19 )
      {
     gameState = GameState::EndScreen;
      }
      
 
 
-			if (Height > 100 && Height < 150  )
+			if (Height > 100 & Height < 150  )
 			{
         arduboy.drawBitmap(40,15,Detach, 10, 43, BLACK );
         
