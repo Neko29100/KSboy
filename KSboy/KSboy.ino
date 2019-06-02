@@ -10,7 +10,7 @@ enum class GameState : uint8_t
 };
 
 Arduboy2 arduboy;
-GameState gameState = GameState::EndScreen;
+GameState gameState = GameState::TitleScreen;
 int Gover = 2;
 int Height = 0;
 int planety = 256;
@@ -132,27 +132,28 @@ void renderGameplay()
         boosteryL--;
       }
       
-      if ( Height <= 100 )
+      if (Height <= 100)
       {
         Height++;
       }
       
-      if (Height >= 100 )
+      if (Height >= 100)
       {
-        Height + 2;
+        Height += 2;
       }
       
-      if (Height >= 250 )
+      if (Height >= 250)
       {
-        Height + 3;
+        Height += 3;
       }
          
-      if ((Height > 150) & (boosteryL > 19))
+      if ((Height > 150) && (boosteryL > 19))
       {
         gameState = GameState::EndScreen;
+        break;
       }
 
-      if ((Height > 100) & (Height < 150))
+      if ((Height > 100) && (Height < 150))
       {
         arduboy.drawBitmap(40, 15, Detach, 10, 43, BLACK);
 
@@ -166,14 +167,14 @@ void renderGameplay()
         }
       }
 
-      arduboy.drawBitmap(0,29, HEIGHT2, 9, 35, BLACK);
+      arduboy.drawBitmap(0, 29, HEIGHT2, 9, 35, BLACK);
       arduboy.setCursor(0, 20);
       arduboy.print(Height);
       arduboy.display();
 
-      for( int backgroundx = 0; backgroundx < 128; backgroundx = backgroundx + 8 )
+      for( int backgroundx = 0; backgroundx < 128; backgroundx = backgroundx + 8)
       {
-        for( int backgroundy = 0; backgroundy < 64; backgroundy = backgroundy + 8 )
+        for( int backgroundy = 0; backgroundy < 64; backgroundy = backgroundy + 8)
         {
           arduboy.drawBitmap( backgroundx, backgroundy, background, 8, 8);
         }
@@ -181,10 +182,10 @@ void renderGameplay()
 
       delay(100);
 
-      arduboy.drawBitmap(planety,20, Planet, 43, 17, BLACK);
-      arduboy.drawBitmap(playery,playerx, player, 43, 17, BLACK);
-      arduboy.drawBitmap(boosteryL,boosterxL, boosterL, 32, 9, BLACK);
-      arduboy.drawBitmap(boosteryR,boosterxR, boosterR, 32, 9, BLACK);
+      arduboy.drawBitmap(planety, 20, Planet, 43, 17, BLACK);
+      arduboy.drawBitmap(playery, playerx, player, 43, 17, BLACK);
+      arduboy.drawBitmap(boosteryL, boosterxL, boosterL, 32, 9, BLACK);
+      arduboy.drawBitmap(boosteryR, boosterxR, boosterR, 32, 9, BLACK);
       
       if(var < 40)
       {
